@@ -1,25 +1,32 @@
 import { useEffect, useRef, useMemo } from 'react';
 import * as d3 from 'd3';
-
+import PropTypes from 'prop-types'
 
 const Display = props => {
     const svgRef = useRef(null);
     const data = useMemo(()=> ({
         name: `${props.resultDisplay.letters}: ${props.resultDisplay.engLetters}`,
-        // children: [{
-        //     name:'example'
-        // }]
+        children: [
+          {
+            name: ['khabza', 'to bake'],
+            children: [
+              { name: ['khubzu - bread'] },
+              { name: ['makhbaz - bakery'] },
+              { name: ['khibaaza', 'the art of baking'] },
+              { name: ['khubaaz','baker'] },
+            ],
+          },
+        ]
     } ), [props.resultDisplay.letters, props.resultDisplay.engLetters]) 
   useEffect(() => {
-      // ;svgRef.current.selectAll("*").remove();
       const width = 928;
       const marginTop = 20;
       const marginRight = 20;
-      const marginBottom = 20;
-      const marginLeft = 50;
+      const marginBottom = 35;
+      const marginLeft = 250;
       
       const root = d3.hierarchy(data);
-      const dx = 20;
+      const dx = 60;
       const dy = (width - marginRight - marginLeft) / (1 + root.height);
       
       const tree = d3.tree().nodeSize([dx, dy]);
@@ -29,7 +36,7 @@ const Display = props => {
       .attr('width', width)
       .attr('height', dx)
       .attr('viewBox', [-marginLeft, -marginTop, width, dx])
-      .attr('style', 'max-width: 100%; height: auto; font: 20px sans-serif; user-select: none;');
+      .attr('style', 'max-width: 100%; height: auto; font: 28px sans-serif; user-select: none;');
       svg.selectAll("*").remove();
       
       if (!props.resultDisplay.letters || !props.resultDisplay.engLetters ){
@@ -74,7 +81,7 @@ const Display = props => {
     
         // Enter any new nodes at the parent's previous position.
         const nodeEnter = node.enter().append("g")
-            .attr("transform", d => `translate(${source.y0},${source.x0})`)
+            .attr("transform", () => `translate(${source.y0},${source.x0})`)
             .attr("fill-opacity", 0)
             .attr("stroke-opacity", 0)
             .on("click", (event, d) => {
@@ -83,7 +90,7 @@ const Display = props => {
             });
     
         nodeEnter.append("circle")
-            .attr("r", 2.0)
+            .attr("r", 4.0)
             .attr("fill", d => d._children ? "#555" : "#999")
             .attr("stroke-width", 10);
     
@@ -94,7 +101,7 @@ const Display = props => {
             .text(d => d.data.name)
           .clone(true).lower()
             .attr("stroke-linejoin", "round")
-            .attr("stroke-width", 3)
+            .attr("stroke-width", 2.5)
             .attr("stroke", "white");
     
         // Transition nodes to their new position.
@@ -105,7 +112,7 @@ const Display = props => {
     
         // Transition exiting nodes to the parent's new position.
         const nodeExit = node.exit().transition(transition).remove()
-            .attr("transform", d => `translate(${source.y},${source.x})`)
+            .attr("transform", () => `translate(${source.y},${source.x})`)
             .attr("fill-opacity", 0)
             .attr("stroke-opacity", 0);
     
@@ -115,7 +122,7 @@ const Display = props => {
     
         // Enter any new links at the parent's previous position.
         const linkEnter = link.enter().append("path")
-            .attr("d", d => {
+            .attr("d", () => {
               const o = {x: source.x0, y: source.y0};
               return diagonal({source: o, target: o});
             });
@@ -126,7 +133,7 @@ const Display = props => {
     
         // Transition exiting nodes to the parent's new position.
         link.exit().transition(transition).remove()
-            .attr("d", d => {
+            .attr("d", () => {
               const o = {x: source.x, y: source.y};
               return diagonal({source: o, target: o});
             });
@@ -149,8 +156,12 @@ const Display = props => {
 
     update(null, root);
 
-  }, [data]);
+  }, [data, props.resultDisplay.letters, props.resultDisplay.engLetters]);
 
   return <svg id="tree" ref={svgRef} />;
 };
+
+Display.propTypes = {
+    resultDisplay: PropTypes.string,
+  };
 export default Display

@@ -8,6 +8,7 @@ const Search = props => {
   const initialSearchData = { data: '' };
 
   const [searchData, setSearchData] = useState(initialSearchData);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -17,26 +18,28 @@ const Search = props => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
+    setSubmitted(true)
     props.handleSearch(searchData);
     setSearchData(initialSearchData);
   };
 
+  
   return (
-    <>
+    <div className={submitted? 'search__submitted' : 'search__container'}>
       <h1>Arabic Root</h1>
-      <form>
+      <form className='search__form'>
         <input
-          className='searchBar'
+          className='search__input'
           id='data'
           name='data'
           onChange={handleChange}
-          placeholder='Enter root letters in Arabic or English'
+          placeholder='Enter root letters'
           value={searchData.data}
           type='text'
         />
         <button
           aria-label='search'
-          className='searchButton'
+          className='search__button'
           onClick={handleSearchSubmit}
           type='submit'>
           <i>
@@ -44,7 +47,7 @@ const Search = props => {
           </i>
         </button>
       </form>
-    </>
+    </div>
   );
 };
 
