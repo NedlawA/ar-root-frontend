@@ -86,6 +86,7 @@ const Display = props => {
             .attr("stroke-opacity", 0)
             .on("click", (event, d) => {
               d.children = d.children ? null : d._children;
+              props.handleGetForms(props.resultDisplay.id);
               update(event, d);
             });
     
@@ -162,6 +163,7 @@ const Display = props => {
 };
 
 Display.propTypes = {
-    resultDisplay: PropTypes.string,
+    resultDisplay: PropTypes.array,
+    handleGetForms: PropTypes.func
   };
 export default Display

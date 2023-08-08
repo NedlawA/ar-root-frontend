@@ -22,10 +22,16 @@ const App = () => {
       .then((res) => setResultDisplay(res.data[0]))
       .catch((err) => console.error(err));
   };
+
+  const handleGetForms = id => {
+    axios
+    .get(`${baseUrl}/words/${id}/forms`)
+    .then((res)=> res.data[0])
+  }
   return (
     <>
       <Search test='1' handleSearch={handleSearch} />
-      <Display resultDisplay={resultDisplay}/>
+      <Display resultDisplay={resultDisplay} handleGetForms={handleGetForms}/>
     </>
   );
 };
