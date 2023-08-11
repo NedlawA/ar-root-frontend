@@ -25,9 +25,11 @@ const App = () => {
   };
 
   const handleGetForms = id => {
+    console.log('oh no');
     axios
     .get(`${baseUrl}/words/${id}/forms`)
-    .then((res)=> (res === [] ? setFormDisplay({letters:'Root not found', engLetters:'Add a root?'}): setFormDisplay(res.data[0])))
+    .then((res) => setFormDisplay(res.data[0]))
+    .catch((err) => console.error(err))
   }
   return (
     <>

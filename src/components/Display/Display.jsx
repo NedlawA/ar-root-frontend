@@ -1,27 +1,27 @@
 import { useEffect, useRef, useMemo } from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types'
-// ${props.formDisplay[0].formVer}
+
 const Display = props => {
-console.log()  
+console.log(props.formDisplay[0].engLetters)  
     const svgRef = useRef(null);
     const data = useMemo(()=> ({
         name: `${props.resultDisplay.letters}: ${props.resultDisplay.engLetters}`,
         children: [
           {
-            name: ['khabza', 'to bake'],
+            name: [`${props.resultDisplay.verbNoun}`],
             children: props.formDisplay.map((form)=> (
               {'name':[form.engDef, ` ${form.engLetters}`, ` ${form.formVer}`]}
             )),
           },
         ]
-    } ), [props.resultDisplay.letters, props.resultDisplay.engLetters]) 
+    } ), [props.resultDisplay.letters, props.resultDisplay.engLetters, props.resultDisplay.verbNoun]) 
   useEffect(() => {
-      const width = 928;
+      const width = 1000;
       const marginTop = 20;
-      const marginRight = 20;
+      const marginRight = 200;
       const marginBottom = 35;
-      const marginLeft = 250;
+      const marginLeft = 200;
       
       const root = d3.hierarchy(data);
       const dx = 60;
@@ -34,7 +34,7 @@ console.log()
       .attr('width', width)
       .attr('height', dx)
       .attr('viewBox', [-marginLeft, -marginTop, width, dx])
-      .attr('style', 'max-width: 100%; height: auto; font: 24px sans-serif; user-select: none;');
+      .attr('style', 'width: 80vw; height: auto; font: 18px sans-serif; user-select: none;');
       svg.selectAll("*").remove();
       
       if (!props.resultDisplay.letters || !props.resultDisplay.engLetters ){
@@ -85,6 +85,7 @@ console.log()
             .on("click", (event, d) => {
               d.children = d.children ? null : d._children;
               props.handleGetForms(props.resultDisplay.id);
+              console.log(`Root id: ${props.resultDisplay.id}`)
               update(event, d);
             });
     
@@ -97,11 +98,12 @@ console.log()
             .attr("dy", "0.71em")
             .attr("x", d => d._children ? -6 : 6)
             .attr("text-anchor", d => d._children ? "end" : "start")
+            .attr("fill", "white")
             .text(d => d.data.name)
           .clone(true).lower()
             .attr("stroke-linejoin", "round")
-            .attr("stroke-width", 2.5)
-            .attr("stroke", "white");
+            .attr("stroke-width", 1.5)
+            .attr("stroke", "#555");
     
         // Transition nodes to their new position.
         const nodeUpdate = node.merge(nodeEnter).transition(transition)
@@ -161,8 +163,8 @@ console.log()
 };
 
 Display.propTypes = {
-    resultDisplay: PropTypes.object,
+    resultDisplay: PropTypes.array,
     handleGetForms: PropTypes.func,
-    formDisplay: PropTypes.object
+    formDisplay: PropTypes.array
   };
 export default Display
