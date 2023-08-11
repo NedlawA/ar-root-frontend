@@ -3,18 +3,16 @@ import * as d3 from 'd3';
 import PropTypes from 'prop-types'
 // ${props.formDisplay[0].formVer}
 const Display = props => {
+console.log()  
     const svgRef = useRef(null);
     const data = useMemo(()=> ({
         name: `${props.resultDisplay.letters}: ${props.resultDisplay.engLetters}`,
         children: [
           {
             name: ['khabza', 'to bake'],
-            children: [
-              { name: [`  ${props.formDisplay[0].engDef}  - ${props.formDisplay[0].engLetters} - ${props.formDisplay[0].formVer}`] },
-              { name: ['makhbaz - bakery'] },
-              { name: ['khibaaza', 'the art of baking'] },
-              { name: ['khubaaz','baker'] },
-            ],
+            children: props.formDisplay.map((form)=> (
+              {'name':[form.engDef, ` ${form.engLetters}`, ` ${form.formVer}`]}
+            )),
           },
         ]
     } ), [props.resultDisplay.letters, props.resultDisplay.engLetters]) 
@@ -36,7 +34,7 @@ const Display = props => {
       .attr('width', width)
       .attr('height', dx)
       .attr('viewBox', [-marginLeft, -marginTop, width, dx])
-      .attr('style', 'max-width: 100%; height: auto; font: 28px sans-serif; user-select: none;');
+      .attr('style', 'max-width: 100%; height: auto; font: 24px sans-serif; user-select: none;');
       svg.selectAll("*").remove();
       
       if (!props.resultDisplay.letters || !props.resultDisplay.engLetters ){
