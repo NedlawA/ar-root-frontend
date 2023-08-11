@@ -8,7 +8,7 @@ const baseUrl = import.meta.env.VITE_APP_BACKEND;
 
 const App = () => {
   const [resultDisplay, setResultDisplay] = useState([]);
-  const [formDisplay, setFormDisplay] = useState([]);
+  const [formDisplay, setFormDisplay] = useState([{formVer:'', engLetters:'', engDef:''}]);
 
   const handleSearch = userSearchData => {
     let param = "";

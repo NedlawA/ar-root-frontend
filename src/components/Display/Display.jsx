@@ -1,7 +1,7 @@
 import { useEffect, useRef, useMemo } from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types'
-
+// ${props.formDisplay[0].formVer}
 const Display = props => {
     const svgRef = useRef(null);
     const data = useMemo(()=> ({
@@ -10,7 +10,7 @@ const Display = props => {
           {
             name: ['khabza', 'to bake'],
             children: [
-              { name: [` ${props.formDisplay[0].formVer} bread`] },
+              { name: [`  ${props.formDisplay[0].engDef}  - ${props.formDisplay[0].engLetters} - ${props.formDisplay[0].formVer}`] },
               { name: ['makhbaz - bakery'] },
               { name: ['khibaaza', 'the art of baking'] },
               { name: ['khubaaz','baker'] },
