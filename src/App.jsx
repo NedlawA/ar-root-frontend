@@ -8,6 +8,7 @@ const baseUrl = import.meta.env.VITE_APP_BACKEND;
 
 const App = () => {
   const [resultDisplay, setResultDisplay] = useState([]);
+  const [formDisplay, setFormDisplay] = useState([]);
 
   const handleSearch = userSearchData => {
     let param = "";
@@ -19,19 +20,19 @@ const App = () => {
     }
     axios
       .get(`${baseUrl}/words/${param}${userSearchData.data}`)
-      .then((res) => setResultDisplay(res.data[0]))
+      .then((res) => (res === [] ? setResultDisplay('Root not found') : setResultDisplay(res.data[0])))
       .catch((err) => console.error(err));
   };
 
   const handleGetForms = id => {
     axios
     .get(`${baseUrl}/words/${id}/forms`)
-    .then((res)=> res.data[0])
+    .then((res)=> (res === [] ? setFormDisplay({letters:'Root not found', engLetters:'Add a root?'}): setFormDisplay(res.data[0])))
   }
   return (
     <>
-      <Search test='1' handleSearch={handleSearch} />
-      <Display resultDisplay={resultDisplay} handleGetForms={handleGetForms}/>
+      <Search handleSearch={handleSearch} />
+      <Display resultDisplay={resultDisplay} handleGetForms={handleGetForms} formDisplay={formDisplay}/>
     </>
   );
 };

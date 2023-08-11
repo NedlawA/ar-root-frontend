@@ -53,5 +53,6 @@ const Search = props => {
 
 Search.propTypes = {
   handleSearch: PropTypes.func.isRequired,
+  handleGetForms: PropTypes.func
 };
 export default Search;
