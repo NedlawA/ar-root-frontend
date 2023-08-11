@@ -2,21 +2,22 @@ import { useEffect, useRef, useMemo } from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types'
 
-const Display = props => {
-console.log(props.formDisplay[0].engLetters)  
+const Display = ({formDisplay, resultDisplay}) => {
+console.log(formDisplay[0].engLetters)  
     const svgRef = useRef(null);
     const data = useMemo(()=> ({
-        name: `${props.resultDisplay.letters}: ${props.resultDisplay.engLetters}`,
+        name: `${resultDisplay.letters}: ${resultDisplay.engLetters}`,
         children: [
           {
-            name: [`${props.resultDisplay.verbNoun}`],
-            children: props.formDisplay.map((form)=> (
+            name: [`${resultDisplay.verbNoun}`],
+            children: formDisplay.map((form)=> (
               {'name':[form.engDef, ` ${form.engLetters}`, ` ${form.formVer}`]}
             )),
           },
         ]
-    } ), [props.resultDisplay.letters, props.resultDisplay.engLetters, props.resultDisplay.verbNoun]) 
+    } ), [resultDisplay.letters, resultDisplay.engLetters, resultDisplay.verbNoun, formDisplay]) 
   useEffect(() => {
+      console.log('foo')
       const width = 1000;
       const marginTop = 20;
       const marginRight = 200;
@@ -37,7 +38,7 @@ console.log(props.formDisplay[0].engLetters)
       .attr('style', 'width: 80vw; height: auto; font: 18px sans-serif; user-select: none;');
       svg.selectAll("*").remove();
       
-      if (!props.resultDisplay.letters || !props.resultDisplay.engLetters ){
+      if (!resultDisplay.letters || !resultDisplay.engLetters ){
           return;
       }
     const gLink = svg.append('g')
@@ -51,7 +52,7 @@ console.log(props.formDisplay[0].engLetters)
       .attr('pointer-events', 'all');
 
       function update(event, source) {
-        const duration = event?.altKey ? 2500 : 250; // hold the alt key to slow down the transition
+        const duration = event?.altKey ? 2500 : 350; // hold the alt key to slow down the transition
         const nodes = root.descendants().reverse();
         const links = root.links();
     
@@ -84,8 +85,6 @@ console.log(props.formDisplay[0].engLetters)
             .attr("stroke-opacity", 0)
             .on("click", (event, d) => {
               d.children = d.children ? null : d._children;
-              props.handleGetForms(props.resultDisplay.id);
-              console.log(`Root id: ${props.resultDisplay.id}`)
               update(event, d);
             });
     
@@ -157,7 +156,7 @@ console.log(props.formDisplay[0].engLetters)
 
     update(null, root);
 
-  }, [data, props.resultDisplay.letters, props.resultDisplay.engLetters]);
+  }, [data, resultDisplay.letters, resultDisplay.engLetters, resultDisplay.verbNoun, resultDisplay.id ]);
 
   return <svg id="tree" ref={svgRef} />;
 };
