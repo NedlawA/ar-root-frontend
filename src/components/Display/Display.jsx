@@ -10,7 +10,7 @@ const Display = props => {
           {
             name: ['khabza', 'to bake'],
             children: [
-              { name: [` kki- bread`] },
+              { name: [` ${props.formDisplay[0].formVer} bread`] },
               { name: ['makhbaz - bakery'] },
               { name: ['khibaaza', 'the art of baking'] },
               { name: ['khubaaz','baker'] },
