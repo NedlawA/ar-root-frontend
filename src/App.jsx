@@ -25,7 +25,7 @@ const App = () => {
         setResultDisplay(res.data[0]), 
         axios.get(`${baseUrl}/words/${res.data[0].id}/forms`)
         .then((res2)=>setFormDisplay(res2.data[0]))))
-      .catch((err) => console.error(err));
+      .catch((err) => setResultDisplay({letters: '', engLetters:"that", verbNoun: err, id: 0}));
   };
 
   return (

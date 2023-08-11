@@ -3,7 +3,6 @@ import * as d3 from 'd3';
 import PropTypes from 'prop-types'
 
 const Display = ({formDisplay, resultDisplay}) => {
-console.log(formDisplay[0].engLetters)  
     const svgRef = useRef(null);
     const data = useMemo(()=> ({
         name: `${resultDisplay.engLetters} - ${resultDisplay.letters} `,
@@ -17,7 +16,6 @@ console.log(formDisplay[0].engLetters)
         ]
     } ), [resultDisplay.letters, resultDisplay.engLetters, resultDisplay.verbNoun, formDisplay]) 
   useEffect(() => {
-      console.log('foo')
       const width = 1000;
       const marginTop = 20;
       const marginRight = 200;
@@ -158,8 +156,9 @@ console.log(formDisplay[0].engLetters)
 
   }, [data, resultDisplay.letters, resultDisplay.engLetters, resultDisplay.verbNoun, resultDisplay.id ]);
 
-  return <>
-  <svg id="tree" ref={svgRef} />
+  return <>{resultDisplay && 
+  <svg id="tree" ref={svgRef} />}
+  {!resultDisplay.id && <h3>Root not found.</h3>}
   </>;
 };
 
