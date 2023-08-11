@@ -6,7 +6,7 @@ const Display = ({formDisplay, resultDisplay}) => {
 console.log(formDisplay[0].engLetters)  
     const svgRef = useRef(null);
     const data = useMemo(()=> ({
-        name: `${resultDisplay.letters}: ${resultDisplay.engLetters}`,
+        name: `${resultDisplay.engLetters} - ${resultDisplay.letters} `,
         children: [
           {
             name: [`${resultDisplay.verbNoun}`],
@@ -158,7 +158,9 @@ console.log(formDisplay[0].engLetters)
 
   }, [data, resultDisplay.letters, resultDisplay.engLetters, resultDisplay.verbNoun, resultDisplay.id ]);
 
-  return <svg id="tree" ref={svgRef} />;
+  return <>
+  <svg id="tree" ref={svgRef} />
+  </>;
 };
 
 Display.propTypes = {

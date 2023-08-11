@@ -2,6 +2,8 @@ import { TbSearch } from 'react-icons/tb';
 import { useState } from 'react';
 import './Search.css'
 import PropTypes from 'prop-types'
+import { GiPlantRoots } from 'react-icons/gi'
+
 
 
 const Search = props => {
@@ -26,7 +28,7 @@ const Search = props => {
   
   return (
     <div className={submitted? 'search__submitted' : 'search__container'}>
-      <h1>Arabic Root</h1>
+      <h1>Arabic <i className='root__icon'><GiPlantRoots/></i> Root</h1>
       <form className='search__form'>
         <input
           className='search__input'

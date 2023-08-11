@@ -21,17 +21,13 @@ const App = () => {
     }
     axios
       .get(`${baseUrl}/words/${param}${userSearchData.data}`)
-      .then((res) => (setResultDisplay(res.data[0]), axios.get(`${baseUrl}/words/${res.data[0].id}/forms`).then((res2)=>setFormDisplay(res2.data[0]))))
-      // add Forms here too; don't separate forms into separate call
+      .then((res) => (
+        setResultDisplay(res.data[0]), 
+        axios.get(`${baseUrl}/words/${res.data[0].id}/forms`)
+        .then((res2)=>setFormDisplay(res2.data[0]))))
       .catch((err) => console.error(err));
   };
 
-  // const handleGetForms = id => {
-  //   axios
-  //   .get(`${baseUrl}/words/${id}/forms`)
-  //   .then((res) => setFormDisplay(res.data[0]))
-  //   .catch((err) => console.error(err))
-  // }
   return (
     <>
       <NavBar />
