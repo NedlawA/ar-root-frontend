@@ -20,7 +20,7 @@ const App = () => {
     }
     axios
       .get(`${baseUrl}/words/${param}${userSearchData.data}`)
-      .then((res) => (res === [] ? setResultDisplay('Root not found') : setResultDisplay(res.data[0])))
+      .then((res) => setResultDisplay(res.data[0]))
       .catch((err) => console.error(err));
   };
 

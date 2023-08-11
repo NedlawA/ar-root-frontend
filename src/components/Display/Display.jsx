@@ -3,7 +3,6 @@ import * as d3 from 'd3';
 import PropTypes from 'prop-types'
 
 const Display = props => {
-  console.log(props.formDisplay[0].formVer)
     const svgRef = useRef(null);
     const data = useMemo(()=> ({
         name: `${props.resultDisplay.letters}: ${props.resultDisplay.engLetters}`,
@@ -11,7 +10,7 @@ const Display = props => {
           {
             name: ['khabza', 'to bake'],
             children: [
-              { name: [` ${props.formDisplay[0].formVer} - bread`] },
+              { name: [` kki- bread`] },
               { name: ['makhbaz - bakery'] },
               { name: ['khibaaza', 'the art of baking'] },
               { name: ['khubaaz','baker'] },
