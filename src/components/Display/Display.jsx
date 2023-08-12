@@ -159,7 +159,7 @@ const Display = ({formDisplay, resultDisplay}) => {
 
   return <>{resultDisplay && 
   <svg id="tree" ref={svgRef} />}
-  {!resultDisplay.id && <AddUpdateForm />}
+  {(formDisplay[0].engLetters!=='' && !resultDisplay.id) && <AddUpdateForm />}
   </>;
 };
 
