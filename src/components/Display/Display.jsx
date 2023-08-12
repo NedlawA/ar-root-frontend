@@ -1,6 +1,7 @@
 import { useEffect, useRef, useMemo } from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types'
+import AddUpdateForm from '../AddUpdateForm/AddUpdateForm'
 
 const Display = ({formDisplay, resultDisplay}) => {
     const svgRef = useRef(null);
@@ -158,7 +159,7 @@ const Display = ({formDisplay, resultDisplay}) => {
 
   return <>{resultDisplay && 
   <svg id="tree" ref={svgRef} />}
-  {!resultDisplay.id && <h3>Root not found.</h3>}
+  {!resultDisplay.id && <AddUpdateForm />}
   </>;
 };
 
