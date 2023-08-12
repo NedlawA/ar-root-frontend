@@ -38,31 +38,28 @@ const conversionKey = {
 }
 
 const AddUpdateForm = () => {
-  const [engLettersFormData, setEngLettersFormData] = useState({r1:'', r2:'', r3:''});
-  const [lettersFormData, setLettersFormData] = useState({r1:'', r2:'', r3:''})
+  const [formData, setFormData] = useState({
+    r1:'', r2:'', r3:'', r1en:'', r2en: '', r3en: ''});
+  
  
   const handleChange = (event) => {
     console.log(event.target.name)
     if (event.target.name === 'r1') {
-      setEngLettersFormData((prev) => ({...prev, r1:event.target.value}));
-      setLettersFormData((prev) => ({...prev, r1:conversionKey[event.target.value]}));
+      setFormData((prev) => ({...prev, r1:conversionKey[event.target.value], r1en:event.target.value}));
     }
     if (event.target.name === 'r2') {
-      setEngLettersFormData((prev) => ({...prev, r2:event.target.value}));
-      setLettersFormData((prev) => ({...prev, r2:conversionKey[event.target.value]}));
+      setFormData((prev) => ({...prev, r2:conversionKey[event.target.value], r2en:event.target.value}));
     }
     if (event.target.name === 'r3') {
-      setEngLettersFormData((prev) => ({...prev, r3:event.target.value}));
-      setLettersFormData((prev) => ({...prev, r3:conversionKey[event.target.value]}));
+      setFormData((prev) => ({...prev, r3:conversionKey[event.target.value], r3en:event.target.value}));
     }
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     // props.handleWordSubmit(formData);
-    console.log(engLettersFormData, lettersFormData)
-    setLettersFormData(initialFormData);
-    setEngLettersFormData(initialFormData);
+    console.log(formData)
+    setFormData(initialFormData);
   };
 
   return (
