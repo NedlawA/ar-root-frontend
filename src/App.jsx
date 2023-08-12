@@ -8,7 +8,7 @@ import NavBar from './components/NavBar/NavBar'
 const baseUrl = import.meta.env.VITE_APP_BACKEND;
 
 const App = () => {
-  const [resultDisplay, setResultDisplay] = useState([]);
+  const [resultDisplay, setResultDisplay] = useState({});
   const [formDisplay, setFormDisplay] = useState([{formVer:'', engLetters:'', engDef:''}]);
 
   const handleSearch = userSearchData => {

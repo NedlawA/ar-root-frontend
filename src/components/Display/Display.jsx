@@ -104,13 +104,13 @@ const Display = ({formDisplay, resultDisplay}) => {
             .attr("stroke", "#555");
     
         // Transition nodes to their new position.
-        const nodeUpdate = node.merge(nodeEnter).transition(transition)
+       node.merge(nodeEnter).transition(transition)
             .attr("transform", d => `translate(${d.y},${d.x})`)
             .attr("fill-opacity", 1)
             .attr("stroke-opacity", 1);
     
         // Transition exiting nodes to the parent's new position.
-        const nodeExit = node.exit().transition(transition).remove()
+        node.exit().transition(transition).remove()
             .attr("transform", () => `translate(${source.y},${source.x})`)
             .attr("fill-opacity", 0)
             .attr("stroke-opacity", 0);
@@ -159,12 +159,12 @@ const Display = ({formDisplay, resultDisplay}) => {
 
   return <>{resultDisplay && 
   <svg id="tree" ref={svgRef} />}
-  {(formDisplay[0].engLetters!=='' && !resultDisplay.id) && <AddUpdateForm />}
+  {(formDisplay[0].formVer !=='' && !resultDisplay.id) && <AddUpdateForm />}
   </>;
 };
 
 Display.propTypes = {
-    resultDisplay: PropTypes.array,
+    resultDisplay: PropTypes.object,
     handleGetForms: PropTypes.func,
     formDisplay: PropTypes.array
   };
