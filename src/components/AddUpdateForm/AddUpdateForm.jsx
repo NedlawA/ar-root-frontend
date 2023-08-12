@@ -1,7 +1,11 @@
 // import "./AddUpdateForm.css";
 import { useState } from "react";
 
-const initialFormData = '';
+const initialFormData = {
+  r1:'', 
+  r2:'', 
+  r3:''
+};
 
 const conversionKey = {
   A:'ء',
@@ -34,32 +38,29 @@ const conversionKey = {
 }
 
 const AddUpdateForm = () => {
-  const [engLettersFormData, setEngLettersFormData] = useState('');
-  const [lettersFormData, setLettersFormData] = useState('')
+  const [engLettersFormData, setEngLettersFormData] = useState({r1:'', r2:'', r3:''});
+  const [lettersFormData, setLettersFormData] = useState({r1:'', r2:'', r3:''})
  
-  let r1=''
-  let r3=''
-  let r2=''
   const handleChange = (event) => {
+    console.log(event.target.name)
     if (event.target.name === 'r1') {
-      r1 = event.target.value;
+      setEngLettersFormData((prev) => ({...prev, r1:event.target.value}));
+      setLettersFormData((prev) => ({...prev, r1:conversionKey[event.target.value]}));
     }
     if (event.target.name === 'r2') {
-      r2 = event.target.value;
+      setEngLettersFormData((prev) => ({...prev, r2:event.target.value}));
+      setLettersFormData((prev) => ({...prev, r2:conversionKey[event.target.value]}));
     }
     if (event.target.name === 'r3') {
-      r3 = event.target.value;
+      setEngLettersFormData((prev) => ({...prev, r3:event.target.value}));
+      setLettersFormData((prev) => ({...prev, r3:conversionKey[event.target.value]}));
     }
-    const letters = `${r1}${r2}${r3}`
-    
-    setEngLettersFormData((prev) => (prev.concat(event.target.value)));
-    setLettersFormData((prev) => (prev.concat(conversionKey[event.target.value])));
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     // props.handleWordSubmit(formData);
-    console.log(letters)
+    console.log(engLettersFormData, lettersFormData)
     setLettersFormData(initialFormData);
     setEngLettersFormData(initialFormData);
   };
@@ -70,7 +71,7 @@ const AddUpdateForm = () => {
         <h3>Add it now</h3>
         <form onSubmit={handleFormSubmit}>
           <input className='submit__button' type="submit" />
-        <select className="root3" defaultValue='r' name='r1' onChange={handleChange}>
+        <select className="root3" defaultValue='r' name='r3' onChange={handleChange}>
           <option value="A">ء - A</option>
           <option value="b">ب - b</option>
           <option value="t">ت - t</option>
@@ -130,7 +131,7 @@ const AddUpdateForm = () => {
           <option value="w">و - w</option>
           <option value="y">ي - y</option>
         </select>
-        <select className="root1" defaultValue='S' name='r3' onChange={handleChange}>
+        <select className="root1" defaultValue='S' name='r1' onChange={handleChange}>
           <option value="A">ء - A</option>
           <option value="b">ب - b</option>
           <option value="t">ت - t</option>
