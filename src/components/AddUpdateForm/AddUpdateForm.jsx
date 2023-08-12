@@ -1,14 +1,10 @@
 // import "./AddUpdateForm.css";
 import { useState } from "react";
 
-const initialFormData = {
-    letters: '',
-    engLetters: '',
-    wordId: ''
-  };
+const initialFormData = '';
 
 const conversionKey = {
-  
+  A:'ء',
   b:'ب',
   t:'ت',
   v:'ث',
@@ -35,32 +31,37 @@ const conversionKey = {
   h:'ه',
   w:'و',
   y:'ي'
-
-
-
-  
 }
 
 const AddUpdateForm = () => {
-  const [engLettersFormData, setFormLettersData] = useState('');
+  const [engLettersFormData, setEngLettersFormData] = useState('');
   const [lettersFormData, setLettersFormData] = useState('')
  
-  let value = '';
+  let r1=''
+  let r3=''
+  let r2=''
   const handleChange = (event) => {
-    console.log(event.target.value)
-
-    value = value.concat(event.target.value);
-    // const name = event.target.name;
-    setFormLettersData((prev) => (prev.concat(event.target.value)));
+    if (event.target.name === 'r1') {
+      r1 = event.target.value;
+    }
+    if (event.target.name === 'r2') {
+      r2 = event.target.value;
+    }
+    if (event.target.name === 'r3') {
+      r3 = event.target.value;
+    }
+    const letters = `${r1}${r2}${r3}`
+    
+    setEngLettersFormData((prev) => (prev.concat(event.target.value)));
     setLettersFormData((prev) => (prev.concat(conversionKey[event.target.value])));
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     // props.handleWordSubmit(formData);
-    console.log(engLettersFormData)
-    console.log(lettersFormData)
-    // setFormData(initialFormData);
+    console.log(letters)
+    setLettersFormData(initialFormData);
+    setEngLettersFormData(initialFormData);
   };
 
   return (
@@ -69,8 +70,8 @@ const AddUpdateForm = () => {
         <h3>Add it now</h3>
         <form onSubmit={handleFormSubmit}>
           <input className='submit__button' type="submit" />
-        <select className="root3" defaultValue='r' onChange={handleChange}>
-          <option value="A">ا - A</option>
+        <select className="root3" defaultValue='r' name='r1' onChange={handleChange}>
+          <option value="A">ء - A</option>
           <option value="b">ب - b</option>
           <option value="t">ت - t</option>
           <option value="v">ث - ṯ</option>
@@ -99,8 +100,8 @@ const AddUpdateForm = () => {
           <option value="w">و - w</option>
           <option value="y">ي - y</option>
         </select>
-        <select className="root2" defaultValue='d' onChange={handleChange}>
-          <option value="A">ا - A</option>
+        <select className="root2" defaultValue='d' name='r2' onChange={handleChange}>
+          <option value="A">ء - A</option>
           <option value="b">ب - b</option>
           <option value="t">ت - t</option>
           <option value="v">ث - ṯ</option>
@@ -129,8 +130,8 @@ const AddUpdateForm = () => {
           <option value="w">و - w</option>
           <option value="y">ي - y</option>
         </select>
-        <select className="root1" defaultValue='S' onChange={handleChange}>
-          <option value="A">ا - A</option>
+        <select className="root1" defaultValue='S' name='r3' onChange={handleChange}>
+          <option value="A">ء - A</option>
           <option value="b">ب - b</option>
           <option value="t">ت - t</option>
           <option value="v">ث - ṯ</option>
