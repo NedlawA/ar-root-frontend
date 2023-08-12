@@ -7,21 +7,59 @@ const initialFormData = {
     wordId: ''
   };
 
+const conversionKey = {
+  
+  b:'ب',
+  t:'ت',
+  v:'ث',
+  j:'ج',
+  H:'ح',
+  x:'خ',
+  d:'د',
+  '*':'ذ',
+  r:'ر',
+  z:'ز',
+  s:'س',
+  $:'ش',
+  S:'ص',
+  D:'ض',
+  T:'ط',
+  Z:'ظ',
+  E:'ع',
+  g:'غ',
+  f:'ف',
+  q:'ق',
+  l:'ل',
+  m:'م',
+  n:'ن',
+  h:'ه',
+  w:'و',
+  y:'ي'
+
+
+
+  
+}
+
 const AddUpdateForm = () => {
-  const [formData, setFormData] = useState(initialFormData);
+  const [engLettersFormData, setFormLettersData] = useState('');
+  const [lettersFormData, setLettersFormData] = useState('')
  
   let value = '';
   const handleChange = (event) => {
     console.log(event.target.value)
-    value.concat(event.target.value);
+
+    value = value.concat(event.target.value);
     // const name = event.target.name;
-    setFormData((prev) => ({ ...prev, letters: value }));
+    setFormLettersData((prev) => (prev.concat(event.target.value)));
+    setLettersFormData((prev) => (prev.concat(conversionKey[event.target.value])));
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     // props.handleWordSubmit(formData);
-    console.log(formData)
+    console.log(engLettersFormData)
+    console.log(lettersFormData)
     // setFormData(initialFormData);
   };
 
@@ -31,7 +69,7 @@ const AddUpdateForm = () => {
         <h3>Add it now</h3>
         <form onSubmit={handleFormSubmit}>
           <input className='submit__button' type="submit" />
-        <select className="root3" defaultValue='r' name='r1' onChange={handleChange}>
+        <select className="root3" defaultValue='r' onChange={handleChange}>
           <option value="A">ا - A</option>
           <option value="b">ب - b</option>
           <option value="t">ت - t</option>
@@ -59,7 +97,6 @@ const AddUpdateForm = () => {
           <option value="n">ن - n</option>
           <option value="h">ه - h</option>
           <option value="w">و - w</option>
-          <option value="ÿ">ى - ỳ</option>
           <option value="y">ي - y</option>
         </select>
         <select className="root2" defaultValue='d' onChange={handleChange}>
@@ -90,7 +127,6 @@ const AddUpdateForm = () => {
           <option value="n">ن - n</option>
           <option value="h">ه - h</option>
           <option value="w">و - w</option>
-          <option value="ÿ">ى - ỳ</option>
           <option value="y">ي - y</option>
         </select>
         <select className="root1" defaultValue='S' onChange={handleChange}>
@@ -121,7 +157,6 @@ const AddUpdateForm = () => {
           <option value="n">ن - n</option>
           <option value="h">ه - h</option>
           <option value="w">و - w</option>
-          <option value="ÿ">ى - ỳ</option>
           <option value="y">ي - y</option>
         </select>
         
