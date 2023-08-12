@@ -1,5 +1,7 @@
 // import "./AddUpdateForm.css";
 import { useState } from "react";
+import PropTypes from 'prop-types'
+import axios from 'axios'
 
 const initialFormData = {
   r1:'', 
@@ -36,12 +38,18 @@ const conversionKey = {
   w:'و',
   y:'ي'
 }
+const baseUrl = import.meta.env.VITE_APP_BACKEND;
 
 const AddUpdateForm = () => {
   const [formData, setFormData] = useState({
     r1:'', r2:'', r3:'', r1en:'', r2en: '', r3en: ''});
   
- 
+    const handleRootSubmit = formData => {
+      axios
+      .post(`${baseUrl}/words`, {letters:formData.r1+formData.r2+formData.r3, engLetters: formData.r1en+formData.r2en+formData.r3en})
+      .then(()=> console.info('success'))
+      .catch((err) => console.error(err))
+    }
   const handleChange = (event) => {
     console.log(event.target.name)
     if (event.target.name === 'r1') {
@@ -57,7 +65,7 @@ const AddUpdateForm = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    // props.handleWordSubmit(formData);
+    handleRootSubmit(formData);
     console.log(formData)
     setFormData(initialFormData);
   };
@@ -163,5 +171,9 @@ const AddUpdateForm = () => {
     </div>
   );
 };
+
+AddUpdateForm.propTypes = {
+handleRootSubmit:PropTypes.func
+}
 
 export default AddUpdateForm;

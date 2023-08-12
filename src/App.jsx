@@ -28,6 +28,7 @@ const App = () => {
       .catch((err) => setResultDisplay({letters: '', engLetters:"that", verbNoun: err, id: 0}));
   };
 
+
   return (
     <>
       <NavBar />
