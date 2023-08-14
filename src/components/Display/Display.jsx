@@ -159,7 +159,7 @@ const Display = ({formDisplay, resultDisplay}) => {
 
   return <>{resultDisplay && 
   <svg id="tree" ref={svgRef} />}
-  {(formDisplay[0].formVer !=='' && !resultDisplay.id) && <AddUpdateForm />}
+  {(!resultDisplay.id) && <AddUpdateForm />}
   </>;
 };
 
