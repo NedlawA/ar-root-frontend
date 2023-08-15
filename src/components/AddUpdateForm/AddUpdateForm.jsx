@@ -73,7 +73,7 @@ const AddUpdateForm = () => {
     setFormData(initialFormData);
     setTimeout(()=>{(setIsSubmitted(false))}, 3000);
   };
-  const message = isSubmitted ? 'Root added': 'Missing a root?'
+  const message = isSubmitted ? 'Root added': 'Add a root?'
   
   return (
     <div>

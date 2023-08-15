@@ -5,7 +5,8 @@ import AddUpdateForm from '../AddUpdateForm/AddUpdateForm'
 import './Display.css'
 
 const Display = ({formDisplay, resultDisplay}) => {
-    const svgRef = useRef(null);
+  console.log (resultDisplay.letters)  
+  const svgRef = useRef(null);
     const data = useMemo(()=> ({
         name: `${resultDisplay.engLetters} - ${resultDisplay.letters} `,
         children: [
@@ -18,7 +19,7 @@ const Display = ({formDisplay, resultDisplay}) => {
         ]
     } ), [resultDisplay.letters, resultDisplay.engLetters, resultDisplay.verbNoun, formDisplay]) 
   useEffect(() => {
-      const width = 1000;
+      const width = 1300;
       const marginTop = 20;
       const marginRight = 200;
       const marginBottom = 35;
@@ -35,7 +36,7 @@ const Display = ({formDisplay, resultDisplay}) => {
       .attr('width', width)
       .attr('height', dx)
       .attr('viewBox', [-marginLeft, -marginTop, width, dx])
-      .attr('style', 'width: 80vw; height: auto; font: 18px sans-serif; user-select: none;');
+      .attr('style', 'width: 90vw; height: auto; font: 28px sans-serif; user-select: none;');
       svg.selectAll("*").remove();
       
       if (!resultDisplay.letters || !resultDisplay.engLetters ){
@@ -94,7 +95,7 @@ const Display = ({formDisplay, resultDisplay}) => {
             .attr("stroke-width", 10);
     
         nodeEnter.append("text")
-            .attr("dy", "0.71em")
+            .attr("dy", "0.81em")
             .attr("x", d => d._children ? -6 : 6)
             .attr("text-anchor", d => d._children ? "end" : "start")
             .attr("fill", "white")
@@ -160,7 +161,7 @@ const Display = ({formDisplay, resultDisplay}) => {
 
   return <>{resultDisplay && 
   <svg id="tree" ref={svgRef} />}
-  {(formDisplay[0].formVer !=='' && !resultDisplay.id) && <AddUpdateForm />}
+  {(resultDisplay.letters === '') && <AddUpdateForm />}
   {resultDisplay.letters && <button id='addFormBtn'>Add form</button>}
   </>;
 };
