@@ -1,3 +1,12 @@
-form {
+#rootSubmit {
     margin-left: 10px;
+    grid-template-columns: repeat (3, 1fr);
+    display: flex;
+    flex-direction: row;
+}
+.submit__button {
+    grid-area: 1 / 1 / span 1 / span 1;
+}
+select.r3 {
+    grid-area: 1 / 2 / span 1 / span 1;
 }

@@ -1,4 +1,4 @@
-// import "./AddUpdateForm.css";
+import "./AddUpdateForm.css";
 import { useState } from "react";
 import PropTypes from 'prop-types'
 import axios from 'axios'
@@ -73,10 +73,10 @@ const AddUpdateForm = () => {
   return (
     <div>
         <h2>Missing a root?</h2>
-        <h3>Add it now</h3>
-        <form onSubmit={handleFormSubmit}>
+        <form id='rootSubmit' onSubmit={handleFormSubmit}>
           <input className='submit__button' type="submit" />
-        <select className="root3" defaultValue='r' name='r3' onChange={handleChange}>
+        <select className="root3" defaultValue='r3' name='r3' onChange={handleChange}>
+          <option value="r3">3rd</option>
           <option value="A">ء - A</option>
           <option value="b">ب - b</option>
           <option value="t">ت - t</option>
@@ -106,7 +106,8 @@ const AddUpdateForm = () => {
           <option value="w">و - w</option>
           <option value="y">ي - y</option>
         </select>
-        <select className="root2" defaultValue='d' name='r2' onChange={handleChange}>
+        <select className="root2" defaultValue='r2' name='r2' onChange={handleChange}>
+          <option value="r2">2nd</option>
           <option value="A">ء - A</option>
           <option value="b">ب - b</option>
           <option value="t">ت - t</option>
@@ -136,7 +137,8 @@ const AddUpdateForm = () => {
           <option value="w">و - w</option>
           <option value="y">ي - y</option>
         </select>
-        <select className="root1" defaultValue='S' name='r1' onChange={handleChange}>
+        <select className="root1" defaultValue='r1' name='r1' onChange={handleChange}>
+          <option value="r1">1st</option>
           <option value="A">ء - A</option>
           <option value="b">ب - b</option>
           <option value="t">ت - t</option>

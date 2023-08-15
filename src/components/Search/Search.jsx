@@ -49,6 +49,8 @@ const Search = props => {
           </i>
         </button>
       </form>
+    
+      <button className='myButtons' id='btn2'>Add root</button>
     </div>
   );
 };
