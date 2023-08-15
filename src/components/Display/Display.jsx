@@ -161,7 +161,7 @@ const Display = ({formDisplay, resultDisplay}) => {
   return <>{resultDisplay && 
   <svg id="tree" ref={svgRef} />}
   {(formDisplay[0].formVer !=='' && !resultDisplay.id) && <AddUpdateForm />}
-  {!AddUpdateForm && <button id='addFormBtn'>Add form</button>}
+  {resultDisplay.letters && <button id='addFormBtn'>Add form</button>}
   </>;
 };
 

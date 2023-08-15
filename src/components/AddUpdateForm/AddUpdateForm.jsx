@@ -30,6 +30,7 @@ const conversionKey = {
   E:'ع',
   g:'غ',
   f:'ف',
+  k:'ك',
   q:'ق',
   l:'ل',
   m:'م',
@@ -43,10 +44,11 @@ const baseUrl = import.meta.env.VITE_APP_BACKEND;
 const AddUpdateForm = () => {
   const [formData, setFormData] = useState({
     r1:'', r2:'', r3:'', r1en:'', r2en: '', r3en: ''});
+  const [isSubmitted, setIsSubmitted] = useState(false)
   
     const handleRootSubmit = formData => {
       axios
-      .post(`${baseUrl}/words`, {letters:formData.r1+formData.r2+formData.r3, engLetters: formData.r1en+formData.r2en+formData.r3en})
+      .post(`${baseUrl}/words`, {letters:`${formData.r1} ${formData.r2} ${formData.r3}`, engLetters: formData.r1en+formData.r2en+formData.r3en})
       .then(()=> console.info('success'))
       .catch((err) => console.error(err))
     }
@@ -66,14 +68,17 @@ const AddUpdateForm = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     handleRootSubmit(formData);
-    console.log(formData)
+    
+    setIsSubmitted(true);
     setFormData(initialFormData);
+    setTimeout(()=>{(setIsSubmitted(false))}, 3000);
   };
-
+  const message = isSubmitted ? 'Root added': 'Missing a root?'
+  
   return (
     <div>
-        <h2>Missing a root?</h2>
-        <form id='rootSubmit' onSubmit={handleFormSubmit}>
+        <h2>{message}</h2>
+        {!isSubmitted && <form id='rootSubmit' onSubmit={handleFormSubmit}>
           <input className='submit__button' type="submit" />
         <select className="root3" defaultValue='r3' name='r3' onChange={handleChange}>
           <option value="r3">3rd</option>
@@ -168,8 +173,7 @@ const AddUpdateForm = () => {
           <option value="w">و - w</option>
           <option value="y">ي - y</option>
         </select>
-        
-        </form>
+        </form>}
     </div>
   );
 };
