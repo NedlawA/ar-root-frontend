@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import * as d3 from "d3";
 import PropTypes from "prop-types";
 import AddUpdateForm from "../AddUpdateForm/AddUpdateForm";
 import "./Display.css";
 
 const Display = ({ formDisplay, resultDisplay }) => {
-  const [isAddFormDisplayed, setIsAddFormDisplayed] = useState(false)
   const svgRef = useRef(null);
   const data = useMemo(
     () => ({
@@ -109,7 +108,6 @@ const Display = ({ formDisplay, resultDisplay }) => {
         .on("click", (event, d) => {
           d.children = d.children ? null : d._children;
           update(event, d);
-          setIsAddFormDisplayed(true)
         });
 
       nodeEnter
@@ -202,7 +200,6 @@ const Display = ({ formDisplay, resultDisplay }) => {
     <>
       {resultDisplay && <svg id="tree" ref={svgRef} />}
       {resultDisplay.letters === "" && <AddUpdateForm />}
-      {isAddFormDisplayed && <button id="addFormBtn">Add word</button>}
     </>
   );
 };
